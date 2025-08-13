@@ -34,6 +34,8 @@ alumnos_con_todas_las_notas_arriba_de_cuatro = []
 
 contador_aprobados_todas_las_asignaturas = 0
 
+arreglo_todas_las_notas = []
+
 for estudiante in estudiantes:
     ########################################################
     #                    Pregunta 1                        #
@@ -56,6 +58,12 @@ for estudiante in estudiantes:
         alumnos_con_todas_las_notas_arriba_de_cuatro.append(estudiante)
         contador_aprobados_todas_las_asignaturas = contador_aprobados_todas_las_asignaturas + 1
         
+    ########################################################
+    #                    Pregunta 3                       #
+    ########################################################    
+    for nota in estudiante["notas"]:
+        arreglo_todas_las_notas.append(nota)
+    
 
 ########################################################
 #                    Pregunta 1                        #
@@ -66,15 +74,46 @@ promedio_max = max(todos_los_promedios)
 # print("los alumnos con el promedio mas alto y bajo son:")
 
 alumnos_con_promedio_min = []
-
 alumnos_con_promedio_max = []
-
 
 for alumno_actual in prom_Estudiantes:
     if(alumno_actual["promedio"] == promedio_min):
         alumnos_con_promedio_min.append(alumno_actual)
     if(alumno_actual["promedio"] == promedio_max):
         alumnos_con_promedio_max.append(alumno_actual)
+        
+########################################################
+#                    Pregunta 3                       #
+########################################################   
+
+# Con sort() ordeno un arreglo de menor a mayor
+arreglo_todas_las_notas.sort()
+
+# EJEMPLO DE ARREGLO ORDENADO
+# [2 , 2 , 2 , 2 , 3 , 3 , 3 , 4 , 4 , 4 , 4 , 4 , 5 , 5]
+
+
+# REVISAR PARA OPTIMIZAR MAS ADELANTE
+
+nota_mas_frecuente = 0.0 
+frecuencia_nota_mas_frecuente = 0
+contador_frecuencia_actual = 1
+nota_actual = arreglo_todas_las_notas[0]
+for i in range(1, len(arreglo_todas_las_notas)):
+    if arreglo_todas_las_notas[i] == nota_actual:
+        contador_frecuencia_actual += 1
+    else:
+        if contador_frecuencia_actual > frecuencia_nota_mas_frecuente:
+            frecuencia_nota_mas_frecuente = contador_frecuencia_actual
+            nota_mas_frecuente = nota_actual
+        nota_actual = arreglo_todas_las_notas[i]
+        contador_frecuencia_actual = 1
+# Verificar la última nota
+if contador_frecuencia_actual > frecuencia_nota_mas_frecuente:
+    frecuencia_nota_mas_frecuente = contador_frecuencia_actual
+    nota_mas_frecuente = nota_actual
+    
+
         
         
 print("########################################################")
@@ -92,3 +131,42 @@ print("Los estudiantes que aprobaron todas sus materias son:")
 for alumno_arriba_de_cuatro in alumnos_con_todas_las_notas_arriba_de_cuatro:
     print(alumno_arriba_de_cuatro)
 print(f"La cantidad de estudiantes que aprobaron todas sus materias es: {contador_aprobados_todas_las_asignaturas}")
+
+print("########################################################")
+print("#                 Respuesta pregunta 3                 #")
+print("########################################################")
+print(f"La nota mas frecuente es: {nota_mas_frecuente}, y se repite: {frecuencia_nota_mas_frecuente} veces")
+
+########################################################
+#                    Pregunta 4                       #
+########################################################  
+
+contador_notas_bajo_cuatro = 0
+
+for nota in arreglo_todas_las_notas:
+    if nota < 4.0:
+        contador_notas_bajo_cuatro = contador_notas_bajo_cuatro + 1
+        
+porcentaje_notas_bajo_cuatro = (contador_notas_bajo_cuatro / len(arreglo_todas_las_notas)) * 100
+
+print("########################################################")
+print("#                 Respuesta pregunta 4                 #")
+print("########################################################")
+
+print(f"El porcentaje de estudiantes con al menos una nota bajo 4.0 es: {round(porcentaje_notas_bajo_cuatro,1)}%")
+
+
+print("########################################################")
+print("#                 Respuesta pregunta 5                 #")
+print("########################################################")
+# Ordenar el arreglo de estudiantes por promedio de mayor a menor
+estudiantes_ordenados = []
+for alumno in prom_Estudiantes:
+    estudiantes_ordenados.append(alumno)
+    
+estudiantes_ordenados.sort(key=lambda x: x["promedio"], reverse=True)
+print("Listado de estudiantes ordenados por promedio (de mayor a menor):")
+for alumno_ordenado in estudiantes_ordenados:
+    print(alumno_ordenado) 
+    
+    
