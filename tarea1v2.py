@@ -32,7 +32,6 @@ def promedios(estudiantes):
         prom_estudiantes.append({"nombre": estudiante["nombre"], "promedio": promedio})
     return prom_estudiantes
 
-
 # lo que se le asigna es el retorno (lo que devolvera) la funcion promedios(estudiantes)
 # devuelve un arreglo/lista de objetos con propiedades(nombre y promedio)
 promedio_estudiantes = promedios(estudiantes)
@@ -148,13 +147,28 @@ estudiantes = [
     {"nombre": "Tomas", "notas": [5.0, 4.1, 1.2]},
 ]
 """
+"""
+    Se crea una funcion la cual permitira obtener el porcentaje de alumnos, que en sus notas
+    tengan al menos una nota menor a 4.0, para esto, se itera en cada uno de los estudiantes,
+    y a su vez, se itera dentro de cada una de las notas del estudiante iterado, para consultar
+    si en alguna posicion de hay alguna nota menor a 4.
+"""
 def obtener_porcentajes_de_alumnos_con_alguna_nota_menor_a_4(estudiantes):
+    #* Paso 1): se crea una variable la cual llevara el conteo de alumnos que cumplan esa condicion
     cantidad_de_alumnos = 0
+    #* Paso 2): se recorre la lista de estudiantes para poder luego iterar en sus notas
     for estudiante in estudiantes:
+        #* Paso 3): se recorre la lista de notas de cada estudiante para realizar la consulta de < 4.0
         for nota in estudiante["notas"]:
+            #* Paso 4): condicional para verificar si la nota en la cual se esta evaluando es menor a 4.0
             if nota < 4.0 :
+                #* Paso 5): se va incrementando la cantidad si se cumple esta condicion
                 cantidad_de_alumnos = cantidad_de_alumnos + 1
+                #* Paso 6): se agrega un break, para salir de la iteracion mas anidada, debido a que 
+                #*          si hay 2 notas < a 4.0 duplicara el conteo de ese alumno.
                 break
+    #* Paso 7): se crea la variable que se retornara con el porcentaje calculado de alumnos con
+    #*          nota < 4.0
     porcentaje = round((cantidad_de_alumnos/len(estudiantes))*100,1)
     return porcentaje
 print(f"{obtener_porcentajes_de_alumnos_con_alguna_nota_menor_a_4(estudiantes)}%")
@@ -167,3 +181,21 @@ estudiantes = [
     {"nombre": "Tomas", "notas": [5.0, 4.1, 1.2]},
 ]
 """
+"""
+    Se crea una funcion la cual se encarga de reordenar la lista de estudiantes segun su promedio
+    para esto se utiliza una funcion creada en el problema 1, la cual estructura esta lista 
+    con el nombre y el promedio de cada estudiante
+"""
+def ordenar_promedios_mayor_a_menor():
+    #* paso 1: Se crea una variable que se le asigna la lista de promedios y nombres
+    #*creada en el problema 1, lo que se hace es utilizar algo ya creado
+    ordena_mayor_menor = promedios(estudiantes)
+    #* paso 2: Se aplica una funcion interna de python para ordenar esta lista de mayor a menor
+    #* esta funcion utiliza el parametro "key=lamnda" para darle a entender que parametro
+    #* de los elementos de la lista se ultilizara para ordenar, despues recibe otro parametro
+    #* llamado reverse el cual es un booleano para saber si se quiere mayor a menor o al reves
+    ordena_mayor_menor.sort(key=lambda alumno : alumno["promedio"], reverse=True)
+    #* paso 3: finalmente se itera cada elemnto de la lista para poder ver en consola mas ordenado
+    for x in ordena_mayor_menor:
+        print (x)
+ordenar_promedios_mayor_a_menor()
