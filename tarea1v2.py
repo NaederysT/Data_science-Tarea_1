@@ -109,6 +109,8 @@ estudiantes = [
 
 #* Agrupar todas las notas de los estudiantes en un solo arreglo
 def generar_arreglo_de_notas(estudiantes):
+    if len(estudiantes) == 0:
+        exit
     #* Paso 1): Se genera un arreglo vacio para ir agregando las notas
     notas_del_diccionario = []
     #* Paso 2): Se comienza a recorrer cada uno de los estudiantes del arreglo estudiantes
@@ -154,6 +156,8 @@ estudiantes = [
     si en alguna posicion de hay alguna nota menor a 4.
 """
 def obtener_porcentajes_de_alumnos_con_alguna_nota_menor_a_4(estudiantes):
+    if len(estudiantes) == 0:
+        exit
     #* Paso 1): se crea una variable la cual llevara el conteo de alumnos que cumplan esa condicion
     cantidad_de_alumnos = 0
     #* Paso 2): se recorre la lista de estudiantes para poder luego iterar en sus notas
