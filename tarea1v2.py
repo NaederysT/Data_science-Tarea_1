@@ -122,7 +122,9 @@ def generar_arreglo_de_notas(estudiantes):
     #* Paso 5): Se retorna finalmente las notas en formato de arreglo []
     return notas_del_diccionario
     
-def obtener_moda():
+def obtener_moda(estudiantes):
+    if len(estudiantes) == 0:
+        exit
     
     #* Se crea un objeto vacio
     repeticiones_de_notas = {}
@@ -139,7 +141,7 @@ def obtener_moda():
         if frecuencia_mas_alta == value_frecuencia:
             moda.append(key_nota)
     return moda
-print(obtener_moda())
+print(obtener_moda(estudiantes))
 
 ######!      4     #####
 """ 4-¿Qué porcentaje de estudiantes tiene al menos una nota bajo 4.0? """
@@ -190,7 +192,9 @@ estudiantes = [
     para esto se utiliza una funcion creada en el problema 1, la cual estructura esta lista 
     con el nombre y el promedio de cada estudiante
 """
-def ordenar_promedios_mayor_a_menor():
+def ordenar_promedios_mayor_a_menor(estudiantes):
+    if len(estudiantes) == 0:
+        exit
     #* paso 1: Se crea una variable que se le asigna la lista de promedios y nombres
     #*creada en el problema 1, lo que se hace es utilizar algo ya creado
     ordena_mayor_menor = promedios(estudiantes)
@@ -202,4 +206,4 @@ def ordenar_promedios_mayor_a_menor():
     #* paso 3: finalmente se itera cada elemnto de la lista para poder ver en consola mas ordenado
     for x in ordena_mayor_menor:
         print (x)
-ordenar_promedios_mayor_a_menor()
+ordenar_promedios_mayor_a_menor(estudiantes)
